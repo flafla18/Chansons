@@ -8,43 +8,88 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            max-width: 650px;
+            max-width: 700px;
             margin: auto;
             padding: 20px;
             background-color: #121212;
             color: #ffffff;
         }
-
         header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        header img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        h1 {
-            text-align: center;
-            color: #ffd700;
-            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
             margin-bottom: 30px;
-            font-family: 'Playfair Display', serif;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: #181818;
+            border-radius: 16px;
+            padding: 18px 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
         }
-
+        header img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .header-title {
+            flex: 1;
+        }
+        .header-title h1 {
+            margin: 0;
+            font-size: 2.1rem;
+            color: #ffd700;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+        nav.song-category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 30px 0 18px 0;
+        }
+        nav.song-category-nav a {
+            padding: 9px 22px;
+            border-radius: 8px;
+            background: #ffd700;
+            color: #121212;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        nav.song-category-nav a.active {
+            background: #fffbe0;
+            color: #bfa100;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .search-bar input {
+            width: 80%;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            background: #232323;
+            color: #ffd700;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+        }
+        .song-list {
+            display: none;
+        }
+        .song-list.active {
+            display: block;
+        }
         ul {
             list-style: none;
             padding: 0;
         }
-
         li {
             margin: 0 0 10px;
         }
-
         li a {
             display: block;
             padding: 12px 15px;
@@ -56,79 +101,226 @@
             font-weight: 600;
             transition: background-color 0.2s, color 0.2s;
         }
-
         li a:hover {
             background-color: #ffd700;
             color: #121212;
+        }
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+            .header-title h1 {
+                font-size: 1.3rem;
+            }
+            .search-bar input {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <img src="illustration-sommaire.png" alt="Illustration Sommaire">
+        <div class="header-title">
+            <h1>Sommaire des Chansons</h1>
+        </div>
     </header>
+    <nav class="song-category-nav">
+        <a id="btn-all" class="active">Toutes</a>
+        <a id="btn-fr">Variété Française</a>
+        <a id="btn-int">Variété Internationale</a>
+    </nav>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Rechercher une chanson...">
+    </div>
+    <div id="list-all" class="song-list active">
+        <ul>
+            <!-- Toutes les chansons (françaises + internationales) -->
+            <li data-type="fr"><a href="cest-un-beau-roman.html">C'est un beau roman, c'est une belle histoire</a></li>
+            <li data-type="fr"><a href="cest-la-fete.html">C'est la Fête</a></li>
+            <li data-type="fr"><a href="cette-annee-la.html">Cette Année-là</a></li>
+            <li data-type="fr"><a href="comme-dhabitude.html">Comme d’habitude</a></li>
+            <li data-type="fr"><a href="des-que-le-vent-soufflera.html">Dès que le vent soufflera</a></li>
+            <li data-type="fr"><a href="diego.html">Diego</a></li>
+            <li data-type="fr"><a href="douce-france.html">Douce France</a></li>
+            <li data-type="fr"><a href="emmenez-moi.html">Emmenez-moi</a></li>
+            <li data-type="fr"><a href="en-chantant.html">En Chantant</a></li>
+            <li data-type="fr"><a href="evidemment.html">Évidemment</a></li>
+            <li data-type="fr"><a href="fais-comme-loiseau.html">Fais comme l'oiseau</a></li>
+            <li data-type="fr"><a href="femme-liberee.html">Femme Libérée</a></li>
+            <li data-type="fr"><a href="femmes-je-vous-aime.html">Femmes Je Vous Aime</a></li>
+            <li data-type="fr"><a href="il-jouait-du-piano-debout.html">Il jouait du piano debout</a></li>
+            <li data-type="fr"><a href="il-venait-davoir-18-ans.html">Il venait d'avoir 18 ans</a></li>
+            <li data-type="fr"><a href="jaime-les-filles.html">J'aime Les Filles</a></li>
+            <li data-type="fr"><a href="je-l-aime-a-mourir.html">Je l'aime à Mourir</a></li>
+            <li data-type="fr"><a href="je-suis-malade.html">Je suis malade</a></li>
+            <li data-type="fr"><a href="je-te-promets.html">Je te promets</a></li>
+            <li data-type="fr"><a href="j-te-l-dis-quand-meme.html">J' te l' dis quand même</a></li>
+            <li data-type="fr"><a href="la-ballade-des-gens-heureux.html">La Ballade des gens heureux</a></li>
+            <li data-type="fr"><a href="la-boheme.html">La Bohème</a></li>
+            <li data-type="fr"><a href="la-foule.html">La Foule</a></li>
+            <li data-type="fr"><a href="la-goffa-lolita.html">La Goffa Lolita</a></li>
+            <li data-type="fr"><a href="la-groupie-du-pianiste.html">La groupie du pianiste</a></li>
+            <li data-type="fr"><a href="la-java-de-broadway.html">La Java de Broadway</a></li>
+            <li data-type="fr"><a href="la-javanaise.html">La Javanaise</a></li>
+            <li data-type="fr"><a href="la-maladie-damour.html">La maladie d'amour</a></li>
+            <li data-type="fr"><a href="la-vie-en-rose.html">La Vie en Rose</a></li>
+            <li data-type="fr"><a href="le-blues-du-businessman.html">Le blues du businessman</a></li>
+            <li data-type="fr"><a href="le-chanteur.html">Le Chanteur</a></li>
+            <li data-type="fr"><a href="le-dernier-jour-du-disco.html">Le dernier jour du disco</a></li>
+            <li data-type="fr"><a href="le-jazz-et-la-java.html">Le Jazz et la Java</a></li>
+            <li data-type="fr"><a href="le-lundi-au-soleil.html">Le Lundi Au Soleil</a></li>
+            <li data-type="fr"><a href="le-sud.html">Le Sud</a></li>
+            <li data-type="fr"><a href="les-champs-elysees.html">Les Champs Élysées</a></li>
+            <li data-type="fr"><a href="les-copains-dabord.html">Les copains d'abord</a></li>
+            <li data-type="fr"><a href="mistral-gagnant.html">Mistral Gagnant</a></li>
+            <li data-type="fr"><a href="mon-mec-a-moi.html">Mon Mec à moi</a></li>
+            <li data-type="fr"><a href="noir-cest-noir.html">Noir c'est noir</a></li>
+            <li data-type="fr"><a href="on-va-saimer.html">On va s'aimer</a></li>
+            <li data-type="fr"><a href="padam.html">Padam</a></li>
+            <li data-type="fr"><a href="partir-un-jour.html">Partir un jour</a></li>
+            <li data-type="fr"><a href="pas-de-boogie-woogie.html">Pas De Boogie Woogie</a></li>
+            <li data-type="fr"><a href="petite-marie.html">Petite Marie</a></li>
+            <li data-type="fr"><a href="pop-corn-sale.html">Pop corn salé</a></li>
+            <li data-type="fr"><a href="pour-le-plaisir.html">Pour Le Plaisir</a></li>
+            <li data-type="fr"><a href="pour-un-flirt-avec-toi.html">Pour un flirt avec toi</a></li>
+            <li data-type="fr"><a href="quand-la-musique-est-bonne.html">Quand la musique est bonne</a></li>
+            <li data-type="fr"><a href="quand-on-na-que-lamour.html">Quand on n'a que l'amour</a></li>
+            <li data-type="fr"><a href="que-je-taime.html">Que je t'aime !</a></li>
+            <li data-type="fr"><a href="que-reste-til-de-nos-amours.html">Que reste-t-il de nos amours ?</a></li>
+            <li data-type="fr"><a href="soleil-bleu.html">Soleil Bleu</a></li>
+            <li data-type="fr"><a href="tous-les-garcons-et-les-filles.html">Tous les garçons et les filles</a></li>
+            <li data-type="fr"><a href="y-a-dla-joie.html">Y a d’la joie</a></li>
+            <li data-type="int"><a href="im-still-standing.html">I'm still standing</a></li>
+            <li data-type="int"><a href="let-it-be.html">Let it be</a></li>
+            <li data-type="int"><a href="yesterday.html">Yesterday</a></li>
+            <li data-type="int"><a href="your-song.html">Your song</a></li>
+            <li data-type="int"><a href="espresso.html">Espresso</a></li>
+            <li data-type="fr"><a href="tu-es-mon-autre.html">Tu es mon autre</a></li>
+            <li data-type="fr"><a href="mon-amour.html">Mon amour</a></li>
+            <li data-type="fr"><a href="qui-a-le-droit.html">Qui a le droit</a></li>
+            <li data-type="fr"><a href="voila.html">Voilà</a></li>
+            <li data-type="fr"><a href="damour-ou-damitie.html">D’amour ou d’amitié</a></li>
+            <li data-type="fr"><a href="je-taime.html">Je t’aime</a></li>
+            <li data-type="fr"><a href="sensualite.html">Sensualité</a></li>
+            <li data-type="fr"><a href="alexandrie-alexandra.html">Alexandrie Alexandra</a></li>
+            <li data-type="fr"><a href="laziza.html">L’Aziza</a></li>
+            <li data-type="fr"><a href="allumer-le-feu.html">Allumer le feu</a></li>
+            <li data-type="fr"><a href="casser-la-voix.html">Casser la voix</a></li>
+            <li data-type="fr"><a href="place-des-grands-hommes.html">Place des grands hommes</a></li>
+            <li data-type="fr"><a href="les-sunlights-des-tropiques.html">Les Sunlights des Tropiques</a></li>
+            <li data-type="fr"><a href="aline.html">Aline</a></li>
+            <li data-type="int"><a href="if-i-aint-got-you.html">If I Ain’t Got You</a></li>
+            <li data-type="fr"><a href="pour-que-tu-m-aimes-encore.html">Pour que tu m’aimes encore</a></li>
+            <li data-type="fr"><a href="le-coup-de-soleil.html">Le coup de soleil</a></li>
+            <li data-type="fr"><a href="couleur-menthe-a-l-eau.html">Couleur menthe à l’eau</a></li>
+            <li data-type="int"><a href="against-all-odds.html">Against All Odds</a></li>
+            <li data-type="int"><a href="always-remember-us-this-way.html">Always Remember Us This Way</a></li>
+            <li data-type="int"><a href="beggin.html">Beggin</a></li>
+            <li data-type="int"><a href="despacito.html">Despacito</a></li>
+            <li data-type="int"><a href="i-follow-rivers.html">I Follow Rivers</a></li>
+            <li data-type="int"><a href="hallelujah.html">Hallelujah</a></li>
+            <li data-type="int"><a href="aint-no-sunshine.html">Ain’t No Sunshine</a></li>
+            <li data-type="int"><a href="hit-the-road-jack.html">Hit The Road Jack</a></li>
+            <li data-type="int"><a href="we-are-family.html">We Are Family</a></li>
+            <li data-type="int"><a href="gimme-gimme-gimme.html">GIMME ! GIMME ! GIMME !</a></li>
+            <li data-type="int"><a href="im-so-excited.html">I’m So Excited</a></li>
+            <li data-type="int"><a href="i-will-survive.html">I Will Survive</a></li>
+            <li data-type="int"><a href="satisfaction.html">Satisfaction</a></li>
+            <li data-type="int"><a href="imagine.html">Imagine</a></li>
+            <li data-type="int"><a href="hey-jude.html">Hey Jude</a></li>
+            <li data-type="int"><a href="all-of-me.html">All Of Me</a></li>
+            <li data-type="int"><a href="everything-i-do.html">Everything I Do</a></li>
+            <li data-type="fr"><a href="pas-sans-toi.html">Pas Sans Toi</a></li>
+            <li data-type="int"><a href="skinny-love.html">Skinny Love</a></li>
+            <li data-type="int"><a href="hurt.html">Hurt</a></li>
+            
+            
+        
 
-    <ul>       
-        <li><a href="cest-un-beau-roman.html">C'est un beau roman, c'est une belle histoire</a></li>
-        <li><a href="cest-la-fete.html">C'est la Fête</a></li>
-        <li><a href="cette-annee-la.html">Cette Année-là</a></li>
-        <li><a href="comme-dhabitude.html">Comme d’habitude</a></li>
-        <li><a href="des-que-le-vent-soufflera.html">Dès que le vent soufflera</a></li>
-        <li><a href="diego.html">Diego</a></li>
-        <li><a href="douce-france.html">Douce France</a></li>
-        <li><a href="emmenez-moi.html">Emmenez-moi</a></li>
-        <li><a href="en-chantant.html">En Chantant</a></li>
-        <li><a href="espresso.html">Espresso</a></li>
-        <li><a href="evidemment.html">Évidemment</a></li>
-        <li><a href="fais-comme-loiseau.html">Fais comme l'oiseau</a></li>
-        <li><a href="femme-liberee.html">Femme Libérée</a></li>
-        <li><a href="femmes-je-vous-aime.html">Femmes Je Vous Aime</a></li>
-        <li><a href="il-jouait-du-piano-debout.html">Il jouait du piano debout</a></li>
-        <li><a href="il-venait-davoir-18-ans.html">Il venait d'avoir 18 ans</a></li>
-        <li><a href="im-still-standing.html">I'm still standing</a></li>
-        <li><a href="jaime-les-filles.html">J'aime Les Filles</a></li>
-        <li><a href="je-l-aime-a-mourir.html">Je l'aime à Mourir</a></li>
-        <li><a href="je-suis-malade.html">Je suis malade</a></li>
-        <li><a href="je-te-promets.html">Je te promets</a></li>
-        <li><a href="j-te-l-dis-quand-meme.html">J' te l' dis quand même</a></li>
-        <li><a href="la-ballade-des-gens-heureux.html">La Ballade des gens heureux</a></li>
-        <li><a href="la-boheme.html">La Bohème</a></li>
-        <li><a href="la-foule.html">La Foule</a></li>
-        <li><a href="la-goffa-lolita.html">La Goffa Lolita</a></li>
-        <li><a href="la-groupie-du-pianiste.html">La groupie du pianiste</a></li>
-        <li><a href="la-java-de-broadway.html">La Java de Broadway</a></li>
-        <li><a href="la-javanaise.html">La Javanaise</a></li>
-        <li><a href="la-maladie-damour.html">La maladie d'amour</a></li>
-        <li><a href="la-vie-en-rose.html">La Vie en Rose</a></li>
-        <li><a href="le-blues-du-businessman.html">Le blues du businessman</a></li>
-        <li><a href="le-chanteur.html">Le Chanteur</a></li>
-        <li><a href="le-dernier-jour-du-disco.html">Le dernier jour du disco</a></li>
-        <li><a href="le-jazz-et-la-java.html">Le Jazz et la Java</a></li>
-        <li><a href="le-lundi-au-soleil.html">Le Lundi Au Soleil</a></li>
-        <li><a href="le-sud.html">Le Sud</a></li>
-        <li><a href="les-champs-elysees.html">Les Champs Élysées</a></li>
-        <li><a href="les-copains-dabord.html">Les copains d'abord</a></li>
-        <li><a href="let-it-be.html">Let it be</a></li>
-        <li><a href="mistral-gagnant.html">Mistral Gagnant</a></li>
-        <li><a href="mon-mec-a-moi.html">Mon Mec à moi</a></li>
-        <li><a href="noir-cest-noir.html">Noir c'est noir</a></li>
-        <li><a href="on-va-saimer.html">On va s'aimer</a></li>
-        <li><a href="padam.html">Padam</a></li>
-        <li><a href="partir-un-jour.html">Partir un jour</a></li>
-        <li><a href="pas-de-boogie-woogie.html">Pas De Boogie Woogie</a></li>
-        <li><a href="petite-marie.html">Petite Marie</a></li>
-        <li><a href="pop-corn-sale.html">Pop corn salé</a></li>
-        <li><a href="pour-le-plaisir.html">Pour Le Plaisir</a></li>
-        <li><a href="pour-un-flirt-avec-toi.html">Pour un flirt avec toi</a></li>
-        <li><a href="quand-la-musique-est-bonne.html">Quand la musique est bonne</a></li>
-        <li><a href="quand-on-na-que-lamour.html">Quand on n'a que l'amour</a></li>
-        <li><a href="que-je-taime.html">Que je t'aime !</a></li>
-        <li><a href="que-reste-til-de-nos-amours.html">Que reste-t-il de nos amours ?</a></li>
-        <li><a href="soleil-bleu.html">Soleil Bleu</a></li>
-        <li><a href="tous-les-garcons-et-les-filles.html">Tous les garçons et les filles</a></li>
-        <li><a href="y-a-dla-joie.html">Y a d’la joie</a></li>
-        <li><a href="yesterday.html">Yesterday</a></li>
-        <li><a href="your-song.html">Your song</a></li>
-    </ul>
+
+        </ul>
+    </div>
+    <div id="list-fr" class="song-list">
+        <ul>
+            <!-- Chansons françaises uniquement (copie/colle les <li data-type="fr"> ci-dessus) -->
+        </ul>
+    </div>
+    <div id="list-int" class="song-list">
+        <ul>
+            <!-- Chansons internationales uniquement (copie/colle les <li data-type="int"> ci-dessus) -->
+        </ul>
+    </div>
+    <script>
+        // Fonction pour trier les <li> par ordre alphabétique (en ignorant les accents et la casse)
+        function sortListItems(list) {
+            const items = Array.from(list.querySelectorAll('li'));
+            items.sort((a, b) => {
+                const textA = a.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                const textB = b.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                return textA.localeCompare(textB);
+            });
+            list.innerHTML = '';
+            items.forEach(li => list.appendChild(li));
+        }
+
+        // Remplir dynamiquement les listes FR et INT à partir de la liste "all"
+        function fillLists() {
+            const allList = document.querySelector('#list-all ul');
+            const frList = document.querySelector('#list-fr ul');
+            const intList = document.querySelector('#list-int ul');
+            frList.innerHTML = '';
+            intList.innerHTML = '';
+            // Trier la liste "all"
+            sortListItems(allList);
+            allList.querySelectorAll('li').forEach(li => {
+                if (li.getAttribute('data-type') === 'fr') {
+                    frList.appendChild(li.cloneNode(true));
+                } else if (li.getAttribute('data-type') === 'int') {
+                    intList.appendChild(li.cloneNode(true));
+                }
+            });
+            // Trier les listes fr et int
+            sortListItems(frList);
+            sortListItems(intList);
+        }
+        fillLists();
+
+        // Navigation
+        const btnAll = document.getElementById('btn-all');
+        const btnFr = document.getElementById('btn-fr');
+        const btnInt = document.getElementById('btn-int');
+        const listAll = document.getElementById('list-all');
+        const listFr = document.getElementById('list-fr');
+        const listInt = document.getElementById('list-int');
+        const navBtns = [btnAll, btnFr, btnInt];
+        const lists = [listAll, listFr, listInt];
+
+        function showList(idx) {
+            navBtns.forEach((btn, i) => btn.classList.toggle('active', i === idx));
+            lists.forEach((list, i) => list.classList.toggle('active', i === idx));
+            document.getElementById('search').value = '';
+            filterSongs('');
+        }
+        btnAll.addEventListener('click', () => showList(0));
+        btnFr.addEventListener('click', () => showList(1));
+        btnInt.addEventListener('click', () => showList(2));
+
+        // Recherche active
+        function filterSongs(query) {
+            const activeList = document.querySelector('.song-list.active ul');
+            const items = activeList.querySelectorAll('li');
+            query = query.trim().toLowerCase();
+            items.forEach(li => {
+                const text = li.textContent.toLowerCase();
+                li.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+        document.getElementById('search').addEventListener('input', function() {
+            filterSongs(this.value);
+        });
+    </script>
 </body>
 </html>
