@@ -48,19 +48,24 @@
             margin: 30px 0 18px 0;
         }
         nav.song-category-nav a {
-            padding: 9px 22px;
-            border-radius: 8px;
-            background: #ffd700;
-            color: #121212;
+            padding: 12px 32px;
+            border-radius: 32px;
+            background: transparent;
+            color: #ffd700;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-            transition: background 0.2s, color 0.2s;
+            border: 3px solid #ffd700;
+            box-shadow: none;
+            font-size: 1.15rem;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
             cursor: pointer;
+            display: inline-block;
         }
-        nav.song-category-nav a.active {
-            background: #fffbe0;
-            color: #bfa100;
+        nav.song-category-nav a.active,
+        nav.song-category-nav a:hover {
+            background: #ffd700;
+            color: #121212;
+            border-color: #ffd700;
         }
         .search-bar {
             display: flex;
@@ -128,14 +133,14 @@
         </div>
     </header>
     <nav class="song-category-nav">
-        <a id="btn-all" class="active">Toutes</a>
-        <a id="btn-fr">Variété Française</a>
-        <a id="btn-int">Variété Internationale</a>
+        <a id="btn-fr"class="active">Variétés Françaises</a>
+        <a id="btn-int">Variétés Internationales</a>
     </nav>
     <div class="search-bar">
         <input type="text" id="search" placeholder="Rechercher une chanson...">
     </div>
-    <div id="list-all" class="song-list active">
+    <!-- list-all est cachée, sert juste de base de données -->
+    <div id="list-all" style="display:none">
         <ul>
             <!-- Toutes les chansons (françaises + internationales) -->
             <li data-type="fr"><a href="cest-un-beau-roman.html">C'est un beau roman, c'est une belle histoire</a></li>
@@ -243,7 +248,7 @@
 
         </ul>
     </div>
-    <div id="list-fr" class="song-list">
+    <div id="list-fr" class="song-list active">
         <ul>
             <!-- Chansons françaises uniquement (copie/colle les <li data-type="fr"> ci-dessus) -->
         </ul>
@@ -289,24 +294,23 @@
         fillLists();
 
         // Navigation
-        const btnAll = document.getElementById('btn-all');
         const btnFr = document.getElementById('btn-fr');
         const btnInt = document.getElementById('btn-int');
-        const listAll = document.getElementById('list-all');
         const listFr = document.getElementById('list-fr');
         const listInt = document.getElementById('list-int');
-        const navBtns = [btnAll, btnFr, btnInt];
-        const lists = [listAll, listFr, listInt];
+        const navBtns = [btnFr, btnInt];
+        const lists = [listFr, listInt];
 
         function showList(idx) {
             navBtns.forEach((btn, i) => btn.classList.toggle('active', i === idx));
             lists.forEach((list, i) => list.classList.toggle('active', i === idx));
-            document.getElementById('search').value = '';
-            filterSongs('');
+            filterSongs(document.getElementById('search').value); // Filtrer selon la recherche en cours
         }
-        btnAll.addEventListener('click', () => showList(0));
-        btnFr.addEventListener('click', () => showList(1));
-        btnInt.addEventListener('click', () => showList(2));
+        btnFr.addEventListener('click', () => showList(0));
+        btnInt.addEventListener('click', () => showList(1));
+
+        // Afficher la liste française par défaut au chargement
+        showList(0);
 
         // Recherche active
         function filterSongs(query) {
